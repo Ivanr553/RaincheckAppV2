@@ -1,0 +1,105 @@
+$font-small: 0.8em
+$font-large: 1.5em
+$nav-back: rgb(24, 49, 96)
+
+
+.navbar
+  width: 90vw
+  height: 10vh
+  background-color: $nav-back
+  padding-right: 0
+  margin: 0
+  display: flex
+  justify-content: flex-end
+  flex-direction: row
+  align-items: flex-end
+  border-radius: 1vh
+  position: relative
+
+.nav-button
+  width: 10%
+  height: 90%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  color: white
+  cursor: pointer
+  margin: auto 0.4vw auto 0.4vw
+  @media screen and (max-width: 1000px)
+    font-size: $font-small
+  @media screen and (min-width: 1000px)
+    font-size: $font-large
+  outline-color: white
+  position: relative
+  background-color: $nav-back
+
+.nav-logo
+  width: 20%
+  height: 100%
+  color: white
+  position: absolute
+  left: 0
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  @media screen and (max-width: 1000px)
+    font-size: 1.4em
+  @media screen and (min-width: 1000px)
+    font-size: 2em
+  user-select: none
+  cursor: pointer
+  outline: none
+
+.profile
+  border: solid 1px
+
+.profile-main-button
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+
+.profile-button
+  height: 50%
+  width: 100%
+  position: absolute
+  margin: 0
+  left: 0
+  bottom: -53%
+  background-color: rgb(41, 83, 160)
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+  border-bottom: solid 1px white
+
+.profile-dropdown
+  height: 50%
+  width: 100%
+  position: absolute
+  margin: 0
+  left: 0
+  bottom: -103%
+  background-color: rgb(41, 83, 160)
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+
+.logout
+  width: 100%
+  height: 100%
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center

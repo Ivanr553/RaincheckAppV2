@@ -1,0 +1,57 @@
+<table *ngIf="rainchecks">
+    <thead>
+      <th>Date</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Comments</th>
+      <th>Delete</th>
+    </thead>
+    <tbody *ngFor="let raincheck of rainchecks; let i = index">
+      <tr *ngIf="i != 0" class="divider-row">
+        <th class="divider"></th>
+        <th class="divider"></th>
+        <th class="divider"></th>
+        <th class="divider"></th>
+        <th class="divider"></th>
+      </tr>
+    <tr>
+      <td>
+        <span>
+          {{raincheck.time}}
+        </span>
+      </td>
+      <td>
+        <span>
+          {{raincheck.name}}
+        </span>
+      </td>
+      <td>
+        <span>
+          {{raincheck.phone}}
+        </span>
+      </td>
+      <td>
+        <span>
+          {{raincheck.comments}}
+        </span>
+      </td>
+      <td>
+        <div class="delete-button" (click)="deleteRaincheck(this, i)">Delete</div>
+      </td>
+    </tr>
+    <tr>
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <th class="divider-2"></th>
+      <th class="divider-2"></th>
+      <td class="empty"></td>
+    </tr>
+    <tr *ngFor="let merchandise of raincheck.merchandise">
+      <td class="empty"></td>
+      <td class="empty"></td>
+      <td>{{merchandise.sku}}</td>
+      <td>{{merchandise.item}}</td>
+      <td class="empty"></td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,18 @@
+<div class="navbar">
+  <div class="nav-logo" [routerLink]="['']">Test App</div>
+  <div *ngIf="!checkLoggedIn()" class="nav-button register" [routerLink]="['register']">Register</div>
+  <div *ngIf="!checkLoggedIn()" class="nav-button login" [routerLink]="['login']">Login</div>
+  <div *ngIf="checkLoggedIn()" class="nav-button rainchecks" [routerLink]="['rainchecks']">Rainchecks</div>
+  <div *ngIf="checkLoggedIn()" class="nav-button profile" [ngStyle]="{'border': profileBorder}">
+    <div class="profile-main-button" (click)="dropdown()">
+      {{user}}
+    </div>
+    <div class="profile-dropdown" *ngIf="dropVal">
+      <div *ngIf="checkLoggedIn()" class="logout" [routerLink]="['']" (click)="logOut()">Log Out</div>
+    </div>
+    <div class="profile-button" *ngIf="dropVal" (click)="dropdown()" [routerLink]="['profile']">
+      Account
+    </div>
+  </div>
+
+</div>
