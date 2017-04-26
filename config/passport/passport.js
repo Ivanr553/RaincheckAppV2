@@ -13,19 +13,6 @@ module.exports = function(passport) {
           console.log("no user found")
           return done(null, false, {message: "Unknown user"});
         }
-        // User.comparePassword(password, user.password, (err, result) => {
-        //   if(err) throw err;
-        //   else if(result) {
-        //     console.log("authenticated");
-        //     global.token = user.id;
-        //     global.user = user.username;
-        //     return done(null, user);
-        //   }
-        //   else if(!result) {
-        //     console.log("not authenticated");
-        //     return done(null, false, {message:"incorrect password"});
-        //   }
-        // }
         if(password === user.password) {
           console.log("authenticated");
           global.token = user.id;
