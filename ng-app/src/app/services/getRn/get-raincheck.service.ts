@@ -15,7 +15,7 @@ export class GetRaincheckService {
     // let observation = Observable.timer(2000);
     let headers = new Headers();
     headers.append("Content-Type", "applicatin/json");
-    return this.http.get("http://localhost:3000/raincheck", {headers: headers})
+    return this.http.get("raincheck", {headers: headers})
       .map(res => res.json())
   }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from "@angular/router";
 
-import { LogoutService } from "../../services/logout/logout.service";
+import { UserService } from "../../services/user/user.service";
 
 @Component({
   selector: 'app-navbar',
@@ -15,12 +16,17 @@ export class NavbarComponent implements OnInit {
   // loggedIn = true;
 
 
-  constructor(private logoutService: LogoutService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
     this.profileBorder = "solid 1px rgba(0, 0, 0, 0)"
     this.dropVal = false;
     this.user = localStorage.getItem("user");
+    let that = this;
+    setInterval(function(){return that.user = localStorage.getItem("user")}, 3000)
   }
 
   checkLoggedIn() {
@@ -29,10 +35,14 @@ export class NavbarComponent implements OnInit {
     }
   }
 
-  logOut() {
-    this.logoutService.logOut();
-    this.dropdown();
+  setuser() {
     this.user = localStorage.getItem("user");
+  }
+
+  logOut() {
+    this.userService.logOut();
+    this.dropdown();
+    this.router.navigate(['../']);
   }
 
   dropdown() {

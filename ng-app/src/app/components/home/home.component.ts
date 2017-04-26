@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -8,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   user: string;
 
-  constructor() { }
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    route.params.subscribe(val => {
+      this.user = localStorage.getItem("user");
+    })
+  }
 
   ngOnInit() {
-    this.user = localStorage.getItem("user");
+    let that = this;
+    setInterval(function(){return that.user = localStorage.getItem("user")}, 1000);
   }
 
 }

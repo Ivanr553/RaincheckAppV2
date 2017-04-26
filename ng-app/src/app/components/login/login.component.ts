@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { LoginService } from "../../services/login/login.service";
+import { UserService } from "../../services/user/user.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   response: any;
 
   constructor(
-    private loginService: LoginService,
+    private userService: UserService,
     private router: Router
   ) { }
 
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         username: this.username,
         password: this.password
       }
-      this.loginService.login(user)
+      this.userService.login(user)
         .subscribe(res => {
           if(res) {
             localStorage.setItem("id", res.json().token);
@@ -40,4 +40,5 @@ export class LoginComponent implements OnInit {
           }
         })
     }
+
 }

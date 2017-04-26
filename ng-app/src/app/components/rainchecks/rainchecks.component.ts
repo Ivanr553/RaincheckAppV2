@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 
 import { Raincheck } from "../../models/raincheck.model";
 
-import { GetRaincheckService } from "../../services/raincheck/get-raincheck.service";
+import { GetRaincheckService } from "../../services/getRn/get-raincheck.service";
 import { DeleteRnService } from "../../services/deleteRn/delete-rn.service";
 
 @Component({

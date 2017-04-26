@@ -14,17 +14,18 @@ import { RainchecksComponent } from './components/rainchecks/rainchecks.componen
 import { AddComponent } from './components/add/add.component';
 
 import { PostUserService } from "./services/post/post-user.service";
-import { LoginService } from './services/login/login.service';
-import { GetRaincheckService } from './services/raincheck/get-raincheck.service';
-import { LogoutService } from "./services/logout/logout.service";
+import { GetRaincheckService } from './services/getRn/get-raincheck.service';
 import { DeleteRnService } from "./services/deleteRn/delete-rn.service"
+import { UserService } from "./services/user/user.service"
+import { AddraincheckService } from "./services/addRn/addraincheck.service";
 
 const appRoutes: Routes = [
   {path: "", component: HomeComponent},
   {path: "register", component: RegisterComponent},
   {path: "login", component: LoginComponent},
   {path: "profile", component: ProfileComponent},
-  {path: "rainchecks", component: RainchecksComponent}
+  {path: "rainchecks", component: RainchecksComponent},
+  {path: "add", component: AddComponent}
 ];
 
 @NgModule({
@@ -46,10 +47,10 @@ const appRoutes: Routes = [
   ],
   providers:[
     PostUserService,
-    LoginService,
     GetRaincheckService,
-    LogoutService,
-    DeleteRnService
+    DeleteRnService,
+    UserService,
+    AddraincheckService
   ],
   bootstrap: [AppComponent]
 })

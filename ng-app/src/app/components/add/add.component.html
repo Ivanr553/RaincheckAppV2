@@ -1,3 +1,54 @@
-<p>
-  add works!
-</p>
+<table>
+    <thead>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Comments</th>
+      <th>
+        <button class="submit-button" name="button" (click)="submitRaincheck()">Submit</button>
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <th class="divider"></th>
+        <th class="divider"></th>
+        <th class="divider"></th>
+        <th class="divider"></th>
+      </tr>
+    <tr>
+      <td>
+        <span>
+          <input type="string" name="name" placeholder="name" [(ngModel)]="name">
+        </span>
+      </td>
+      <td>
+        <span>
+          <input type="string" name="phone" placeholder="phone" [(ngModel)]="phone">
+        </span>
+      </td>
+      <td class="textarea-td">
+          <textarea type="string" name="comments" placeholder="comments" [(ngModel)]="comments"></textarea>
+      </td>
+      <td class="empty"></td>
+    </tr>
+    <tr>
+      <td class="empty"></td>
+      <th>Sku</th>
+      <th>Item</th>
+      <td class="empty"></td>
+    </tr>
+    <tr *ngFor="let merchandise of merchandiseList; let index = index">
+      <td class="empty"></td>
+      <td>
+        <input type="string" placeholder="sku" [(ngModel)]="skus[index]">
+      </td>
+      <td>
+        <input type="string" placeholder="item" [(ngModel)]="items[index]">
+      </td>
+      <td class="empty" *ngIf="index != merchandiseList.length-1"></td>
+      <td *ngIf="index === merchandiseList.length-1">
+        <button class="remove-button" (click)="removeItem()" *ngIf="merchandiseList.length > 1"> - </button>
+        <button class="add-button" name="button"  (click)="addItem()"> + </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

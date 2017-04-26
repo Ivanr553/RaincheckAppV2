@@ -1,11 +1,13 @@
 <div class="navbar">
-  <div class="nav-logo" [routerLink]="['']">Test App</div>
+  <div *ngIf="!checkLoggedIn()" class="nav-logo" [routerLink]="['']">Home</div>
+  <div *ngIf="checkLoggedIn()" class="nav-logo" [routerLink]="['rainchecks']">Rainchecks</div>
   <div *ngIf="!checkLoggedIn()" class="nav-button register" [routerLink]="['register']">Register</div>
   <div *ngIf="!checkLoggedIn()" class="nav-button login" [routerLink]="['login']">Login</div>
-  <div *ngIf="checkLoggedIn()" class="nav-button rainchecks" [routerLink]="['rainchecks']">Rainchecks</div>
+  <div *ngIf="checkLoggedIn()" class="nav-button add" [routerLink]="['add']">Add Raincheck</div>
   <div *ngIf="checkLoggedIn()" class="nav-button profile" [ngStyle]="{'border': profileBorder}">
     <div class="profile-main-button" (click)="dropdown()">
       {{user}}
+      <span *ngIf="!user">User</span>
     </div>
     <div class="profile-dropdown" *ngIf="dropVal">
       <div *ngIf="checkLoggedIn()" class="logout" [routerLink]="['']" (click)="logOut()">Log Out</div>

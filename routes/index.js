@@ -11,12 +11,6 @@ router.get("/", (req, res) => {
   res.send("index");
 })
 
-//login
-router.get("/login", (req, res) => {
-  res.sendfile("./public/login.html");
-})
-
-
 //register route
 router.post("/register", (req, res) => {
   let newUser = new User({
@@ -26,7 +20,7 @@ router.post("/register", (req, res) => {
 
   User.saveUser(newUser, (err, newUser) => {
     if (err) throw err;
-    res.sendfile("./public/registered.html");
+    res.send({message: "User Registered"});
   })
 })
 

@@ -1,6 +1,10 @@
-<h1>Register</h1>
-<form (ngSubmit)="onRegisterSubmit()">
-  <input type="text" name="username" placeholder="username" [(ngModel)]="username">
-  <input type="password" name="password" placeholder="password" [(ngModel)]="password">
-  <button type="submit" name="button">Submit</button>
-</form>
+<div class="wrapper">
+  <div class="register-box">
+    <span class="title">Create an Account</span>
+      <form (ngSubmit)="onRegisterSubmit()">
+        <input type="text" name="username" placeholder="username" [(ngModel)]="username">
+        <input type="password" name="password" placeholder="password" [(ngModel)]="password">
+        <button class="register-button" type="submit" name="button">Register</button>
+      </form>
+  </div>
+</div>

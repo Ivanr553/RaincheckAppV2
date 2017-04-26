@@ -17,6 +17,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/add", (req, res) => {
+  console.log("called")
   //formatting phone string
   let editedPhone = req.body.phone;
   editedPhone =

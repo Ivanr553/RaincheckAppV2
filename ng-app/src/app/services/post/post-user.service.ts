@@ -12,7 +12,7 @@ export class PostUserService {
   postUser(newUser) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return this.http.post("http://localhost:3000/register", newUser, {headers: headers});
+    return this.http.post("register", newUser, {headers: headers});
   }
 
 }

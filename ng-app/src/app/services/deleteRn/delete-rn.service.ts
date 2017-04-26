@@ -11,7 +11,7 @@ export class DeleteRnService {
   removeRn(rnId) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return this.http.post("http://localhost:3000/raincheck/delete",{id: rnId}, {headers: headers}).subscribe(r=>console.log(r));
+    return this.http.post("raincheck/delete",{id: rnId}, {headers: headers}).subscribe(r=>console.log(r));
   }
 
 }
