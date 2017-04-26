@@ -42,7 +42,7 @@ export class AddComponent implements OnInit {
 
   submitRaincheck(){
     //check for empty fields and incorrect phone number length
-    if(this.name == "" || this.phone == "" || this.skus.length == 0 || this.items.length || this.items.length != this.skus.length || this.phone.length != 10) {
+    if(this.name == "" || this.phone == "" || this.skus.length === 0 || this.items.length === 0 || this.items.length != this.skus.length || this.phone.length != 10) {
       return alert("Fill in all fields before submitting");
     }
 
