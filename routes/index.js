@@ -8,7 +8,7 @@ const User = require("../models/userModel");
 
 //Index
 router.get("/", (req, res) => {
-  res.send("index");
+  res.sendFile(path.join(__dirname + '../public/index.html'));
 })
 
 //register route
