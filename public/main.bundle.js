@@ -876,6 +876,8 @@ var AppComponent = (function () {
     function AppComponent() {
     }
     AppComponent.prototype.ngOnInit = function () {
+        localStorage.setItem("user", "");
+        localStorage.setItem("userid", "");
     };
     return AppComponent;
 }());

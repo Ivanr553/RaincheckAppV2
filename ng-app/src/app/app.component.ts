@@ -12,6 +12,7 @@ constructor(
 ) { }
 
    ngOnInit() {
-
+     localStorage.setItem("user", "");
+     localStorage.setItem("userid", "");
    }
 }
