@@ -59,7 +59,7 @@ export class AddComponent implements OnInit {
     }
 
     let raincheck = {
-      user: localStorage.getItem("user"),
+      userid: localStorage.getItem("userid"),
       name: this.name,
       phone: this.phone,
       comments: this.comments,

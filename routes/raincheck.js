@@ -6,7 +6,7 @@ const passport = require("passport");
 const LocalPassport = require("passport-local").Strategy
 
 router.post("/", (req, res) => {
-  Raincheck.find({user: req.body.user}, (err, rainchecks) => {
+  Raincheck.find({userid: req.body.userid}, (err, rainchecks) => {
     if(err) throw(err);
     if(!rainchecks || rainchecks.length === 0) {
       return res.send({message: "no rainchecks found"})
@@ -19,6 +19,7 @@ router.post("/", (req, res) => {
 
 router.post("/add", (req, res) => {
   console.log("called")
+  console.log(req.body.userid)
   //formatting phone string
   let editedPhone = req.body.phone;
   editedPhone =
@@ -44,7 +45,7 @@ router.post("/add", (req, res) => {
      today = mm+'/'+dd+'/'+yyyy;
 
   let newRaincheck = new Raincheck({
-    user: req.body.user,
+    userid: req.body.userid,
     name: req.body.name,
     phone: editedPhone,
     merchandise: req.body.merchandise,

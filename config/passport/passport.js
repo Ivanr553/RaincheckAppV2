@@ -17,7 +17,7 @@ module.exports = function(passport) {
           if(err) throw err;
           else if(result) {
             console.log("authenticated");
-            global.token = user.id;
+            global.userid = user.id;
             global.user = user.username;
             return done(null, user);
           }

@@ -27,7 +27,7 @@ router.post("/register", (req, res) => {
 //authenticate log in
 router.post("/authenticate", passport.authenticate("local"), function(req, res) {
     res.send({
-      "token": global.token,
+      "userid": global.userid,
        "user": global.user
      })
   });

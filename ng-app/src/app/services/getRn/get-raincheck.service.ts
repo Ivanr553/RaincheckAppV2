@@ -11,12 +11,12 @@ export class GetRaincheckService {
 
   constructor(private http: Http) { }
   getRainchecks(): Observable<Raincheck[]> {
-    let user = {
-      user: localStorage.getItem("user")
+    let userid = {
+      userid: localStorage.getItem("userid")
     };
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return this.http.post("raincheck", user, {headers: headers})
+    return this.http.post("raincheck", userid, {headers: headers})
       .map(res => res.json())
   }
 

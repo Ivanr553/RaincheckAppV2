@@ -71,7 +71,7 @@ const index = require("./routes/index");
 app.use("/", index);
 
 //global variables
-global.token = null;
+global.userid = null;
 global.user = null;
 
 //port

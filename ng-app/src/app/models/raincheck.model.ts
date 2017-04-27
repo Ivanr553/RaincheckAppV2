@@ -1,5 +1,5 @@
 export interface Raincheck{
-  user: String,
+  userid: String,
   date: String,
   name: String,
   phone: String,

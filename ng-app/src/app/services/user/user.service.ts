@@ -13,13 +13,12 @@ export class UserService {
   login(user) {
     let headers = new Headers();
     headers.append("Content-Type", "application/json");
-    return this.http.post("authenticate", user, {headers: headers});
+    return this.http.post("authenticate", user, {headers: headers})
   }
 
   logOut() {
     localStorage.setItem("user", "");
-    localStorage.setItem("token", "");
-    localStorage.setItem("id", "");
+    localStorage.setItem("userid", "");
   }
 
   checkUser() {

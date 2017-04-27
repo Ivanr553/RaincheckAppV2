@@ -83,10 +83,12 @@ var LoginComponent = (function () {
         this.userService.login(user)
             .subscribe(function (res) {
             if (res) {
-                // console.log(res.json().token)
-                localStorage.setItem("id", res.json().token);
+                console.log(res.json());
+                if (res.json().message) {
+                    return alert(res.json().message);
+                }
+                localStorage.setItem("userid", res.json().userid);
                 localStorage.setItem("user", res.json().user);
-                _this.response = "successful";
                 _this.router.navigate(['../']);
             }
             else {
@@ -616,8 +618,7 @@ var UserService = (function () {
     };
     UserService.prototype.logOut = function () {
         localStorage.setItem("user", "");
-        localStorage.setItem("token", "");
-        localStorage.setItem("id", "");
+        localStorage.setItem("userid", "");
     };
     UserService.prototype.checkUser = function () {
         return localStorage.getItem("user");
@@ -745,12 +746,12 @@ var GetRaincheckService = (function () {
         this.http = http;
     }
     GetRaincheckService.prototype.getRainchecks = function () {
-        var user = {
-            user: localStorage.getItem("user")
+        var userid = {
+            userid: localStorage.getItem("userid")
         };
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
         headers.append("Content-Type", "application/json");
-        return this.http.post("raincheck", user, { headers: headers })
+        return this.http.post("raincheck", userid, { headers: headers })
             .map(function (res) { return res.json(); });
     };
     return GetRaincheckService;
@@ -1022,7 +1023,7 @@ var AddComponent = (function () {
             merchandise.push(combo);
         }
         var raincheck = {
-            user: localStorage.getItem("user"),
+            userid: localStorage.getItem("userid"),
             name: this.name,
             phone: this.phone,
             comments: this.comments,
