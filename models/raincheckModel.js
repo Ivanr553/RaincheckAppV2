@@ -3,7 +3,7 @@ const express = require("express");
 const router = express.Router();
 
 let raincheckSchema = mongoose.Schema({
-  id: String,
+  user: String,
   date: String,
   name: String,
   phone: String,

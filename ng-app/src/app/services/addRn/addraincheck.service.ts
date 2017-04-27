@@ -11,7 +11,6 @@ export class AddraincheckService {
   ) { }
 
   addRaincheck(newRaincheck) {
-    console.log("called");
     console.log(newRaincheck)
     let headers = new Headers();
     headers.append("Content-Type", "application/json");

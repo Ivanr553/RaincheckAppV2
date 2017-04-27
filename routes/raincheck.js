@@ -2,10 +2,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const Raincheck = require("../models/raincheckModel");
+const passport = require("passport");
+const LocalPassport = require("passport-local").Strategy
 
-router.get("/", (req, res) => {
-
-  Raincheck.find({}, (err, rainchecks) => {
+router.post("/", (req, res) => {
+  Raincheck.find({user: req.body.user}, (err, rainchecks) => {
     if(err) throw(err);
     if(!rainchecks || rainchecks.length === 0) {
       return res.send({message: "no rainchecks found"})
@@ -43,7 +44,7 @@ router.post("/add", (req, res) => {
      today = mm+'/'+dd+'/'+yyyy;
 
   let newRaincheck = new Raincheck({
-    id: req.body.id,
+    user: req.body.user,
     name: req.body.name,
     phone: editedPhone,
     merchandise: req.body.merchandise,

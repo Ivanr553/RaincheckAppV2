@@ -83,6 +83,7 @@ var LoginComponent = (function () {
         this.userService.login(user)
             .subscribe(function (res) {
             if (res) {
+                // console.log(res.json().token)
                 localStorage.setItem("id", res.json().token);
                 localStorage.setItem("user", res.json().user);
                 _this.response = "successful";
@@ -659,7 +660,6 @@ var AddraincheckService = (function () {
         this.http = http;
     }
     AddraincheckService.prototype.addRaincheck = function (newRaincheck) {
-        console.log("called");
         console.log(newRaincheck);
         var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
         headers.append("Content-Type", "application/json");
@@ -745,13 +745,13 @@ var GetRaincheckService = (function () {
         this.http = http;
     }
     GetRaincheckService.prototype.getRainchecks = function () {
-        // let observation = Observable.timer(2000);
+        var user = {
+            user: localStorage.getItem("user")
+        };
         var headers = new __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Headers */]();
-        headers.append("Content-Type", "applicatin/json");
-        return this.http.get("raincheck", { headers: headers })
+        headers.append("Content-Type", "application/json");
+        return this.http.post("raincheck", user, { headers: headers })
             .map(function (res) { return res.json(); });
-    };
-    GetRaincheckService.prototype.refreshData = function () {
     };
     return GetRaincheckService;
 }());
@@ -1022,7 +1022,6 @@ var AddComponent = (function () {
             merchandise.push(combo);
         }
         var raincheck = {
-            id: localStorage.getItem("id"),
             user: localStorage.getItem("user"),
             name: this.name,
             phone: this.phone,

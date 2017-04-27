@@ -10,17 +10,14 @@ import { Raincheck } from "../../models/raincheck.model";
 export class GetRaincheckService {
 
   constructor(private http: Http) { }
-
   getRainchecks(): Observable<Raincheck[]> {
-    // let observation = Observable.timer(2000);
+    let user = {
+      user: localStorage.getItem("user")
+    };
     let headers = new Headers();
-    headers.append("Content-Type", "applicatin/json");
-    return this.http.get("raincheck", {headers: headers})
+    headers.append("Content-Type", "application/json");
+    return this.http.post("raincheck", user, {headers: headers})
       .map(res => res.json())
-  }
-
-  refreshData() {
-
   }
 
 }

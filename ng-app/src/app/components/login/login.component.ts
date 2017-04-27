@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(user)
         .subscribe(res => {
           if(res) {
+            // console.log(res.json().token)
             localStorage.setItem("id", res.json().token);
             localStorage.setItem("user", res.json().user);
             this.response = "successful";

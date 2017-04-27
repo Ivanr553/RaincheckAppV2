@@ -1,7 +1,7 @@
 const express = require("express");
 const passport = require("passport");
 const User = require("../../models/userModel");
-const LocalPassport = require("passport-local").Strategy
+const LocalPassport = require("passport-local").Strategy;
 
 module.exports = function(passport) {
 
