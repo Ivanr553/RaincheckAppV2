@@ -27,8 +27,12 @@ export class RegisterComponent implements OnInit {
     }
     this.postUserService.postUser(user)
       .subscribe(data => {
-        console.log(data);
+        if(data.json().invalid) {
+          return alert(data.json().invalid);
+        }
+        else {
+          this.router.navigate(["../login"]);
+        }
       });
-      this.router.navigate(["../login"]);
   }
 }

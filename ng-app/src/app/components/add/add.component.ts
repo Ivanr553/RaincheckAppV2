@@ -43,7 +43,32 @@ export class AddComponent implements OnInit {
   submitRaincheck(){
     //check for empty fields and incorrect phone number length
     if(this.name == "" || this.phone == "" || this.skus.length === 0 || this.items.length === 0 || this.items.length != this.skus.length || this.phone.length != 10) {
-      return alert("Fill in all fields before submitting");
+      //initializing alert messages
+      let alertGeneral = "Please fill in fields:";
+      let alertInequal = "";
+      let alertPhone = "";
+
+      //checking input values and adding to message field
+      if(!this.name) {
+        alertGeneral += " name,";
+      }
+      if(!this.phone) {
+        alertGeneral += " phone,";
+      }
+      if(this.skus.length === 0 || !this.skus) {
+        alertGeneral += " skus,";
+      }
+      if(this.items.length === 0 || !this.items) {
+        alertGeneral += " items,";
+      }
+      if(this.skus && this.items && this.skus.length != this.items.length) {
+        alertInequal = "\nSku and items inproperly matched";
+      }
+      if(this.phone && this.phone.length) {
+        alertPhone = "\nMake sure phone number is 10 digits with no spaces, dashes, or parenthesis";
+      }
+      alertGeneral = alertGeneral.substr(0, alertGeneral.length-1) + ".";
+      return alert(alertGeneral + alertInequal + alertPhone);
     }
 
     let merchandise = [];
@@ -65,8 +90,10 @@ export class AddComponent implements OnInit {
       comments: this.comments,
       merchandise: merchandise
     }
-    this.add.addRaincheck(raincheck);
-    this.router.navigate(["../rainchecks"]);
+    if(confirm("Add raincheck for " + raincheck.name)) {
+      this.add.addRaincheck(raincheck);
+      this.router.navigate(["../rainchecks"]);
+    }
   }
 
 }

@@ -40,9 +40,11 @@ export class NavbarComponent implements OnInit {
   }
 
   logOut() {
-    this.userService.logOut();
-    this.dropdown();
-    this.router.navigate(['../']);
+    if(confirm("Are you sure you want to log out?")){
+      this.userService.logOut();
+      this.dropdown();
+      this.router.navigate(['../']);
+    }
   }
 
   dropdown() {

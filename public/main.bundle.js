@@ -30,6 +30,9 @@ var HomeComponent = (function () {
     HomeComponent.prototype.ngOnInit = function () {
         var that = this;
         setInterval(function () { return that.user = localStorage.getItem("user"); }, 1000);
+        if (this.user) {
+            this.router.navigate(['/rainchecks']);
+        }
     };
     return HomeComponent;
 }());
@@ -76,6 +79,9 @@ var LoginComponent = (function () {
     };
     LoginComponent.prototype.onLoginSubmit = function () {
         var _this = this;
+        if (!this.username || !this.password) {
+            return alert("Please fill in all fields");
+        }
         var user = {
             username: this.username,
             password: this.password
@@ -83,9 +89,9 @@ var LoginComponent = (function () {
         this.userService.login(user)
             .subscribe(function (res) {
             if (res) {
-                console.log(res.json());
-                if (res.json().message) {
-                    return alert(res.json().message);
+                console.log(res);
+                if (res.json().invalid) {
+                    return alert(res.json().invalid);
                 }
                 localStorage.setItem("userid", res.json().userid);
                 localStorage.setItem("user", res.json().user);
@@ -154,9 +160,11 @@ var NavbarComponent = (function () {
         this.user = localStorage.getItem("user");
     };
     NavbarComponent.prototype.logOut = function () {
-        this.userService.logOut();
-        this.dropdown();
-        this.router.navigate(['../']);
+        if (confirm("Are you sure you want to log out?")) {
+            this.userService.logOut();
+            this.dropdown();
+            this.router.navigate(['../']);
+        }
     };
     NavbarComponent.prototype.dropdown = function () {
         if (this.dropVal) {
@@ -335,15 +343,20 @@ var RegisterComponent = (function () {
     RegisterComponent.prototype.ngOnInit = function () {
     };
     RegisterComponent.prototype.onRegisterSubmit = function () {
+        var _this = this;
         var user = {
             username: this.username,
             password: this.password
         };
         this.postUserService.postUser(user)
             .subscribe(function (data) {
-            console.log(data);
+            if (data.json().invalid) {
+                return alert(data.json().invalid);
+            }
+            else {
+                _this.router.navigate(["../login"]);
+            }
         });
-        this.router.navigate(["../login"]);
     };
     return RegisterComponent;
 }());
@@ -422,7 +435,7 @@ exports = module.exports = __webpack_require__(9)();
 
 
 // module
-exports.push([module.i, "\r\n", ""]);
+exports.push([module.i, ".wrapper {\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  text-align: center; }\n", ""]);
 
 // exports
 
@@ -512,7 +525,7 @@ exports = module.exports = __webpack_require__(9)();
 
 
 // module
-exports.push([module.i, "input {\n  display: block;\n  margin-top: 1vh; }\n\n.title {\n  font-size: 2.5em;\n  margin-bottom: 3vh;\n  margin-top: 1vh;\n  color: white; }\n\n.wrapper {\n  width: 90vw;\n  height: 60vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: rgba(0, 0, 0, 0.2); }\n\n.register-box {\n  width: 20vw;\n  min-width: 30vh;\n  height: 30vh;\n  background-color: #183160;\n  padding: 1vw;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  border-radius: 1vh;\n  position: relative; }\n\n.register-button {\n  position: absolute;\n  bottom: 5%;\n  right: 35%;\n  width: 30%;\n  height: 15%;\n  font-size: 1.1em;\n  border-radius: 0.5vh;\n  cursor: pointer; }\n", ""]);
+exports.push([module.i, "input {\n  display: block;\n  margin-top: 1vh; }\n\n.title {\n  margin-bottom: 3vh;\n  margin-top: 1vh;\n  color: white; }\n  @media screen and (max-width: 1500px) {\n    .title {\n      font-size: 2em; } }\n  @media screen and (min-width: 1500px) {\n    .title {\n      font-size: 2.5em; } }\n\n.wrapper {\n  width: 90vw;\n  height: 60vh;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: center;\n      -ms-flex-pack: center;\n          justify-content: center;\n  background-color: rgba(0, 0, 0, 0.2); }\n\n.register-box {\n  width: 20vw;\n  min-width: 30vh;\n  height: 30vh;\n  background-color: #183160;\n  padding: 1vw;\n  display: -webkit-box;\n  display: -ms-flexbox;\n  display: flex;\n  -webkit-box-orient: vertical;\n  -webkit-box-direction: normal;\n      -ms-flex-direction: column;\n          flex-direction: column;\n  -webkit-box-align: center;\n      -ms-flex-align: center;\n          align-items: center;\n  -webkit-box-pack: start;\n      -ms-flex-pack: start;\n          justify-content: flex-start;\n  border-radius: 1vh;\n  position: relative; }\n\n.register-button {\n  position: absolute;\n  bottom: 5%;\n  right: 35%;\n  width: 30%;\n  height: 15%;\n  font-size: 1.1em;\n  border-radius: 0.5vh;\n  cursor: pointer; }\n", ""]);
 
 // exports
 
@@ -539,7 +552,7 @@ module.exports = "<table>\n    <thead>\n      <th>Name</th>\n      <th>Phone</th
 /***/ 171:
 /***/ (function(module, exports) {
 
-module.exports = "<h1 *ngIf=\"user\">Welcome, {{user}}!</h1>\n<h1 *ngIf=\"!user\">Welcome to my app!<br> Create an account to get started</h1>\n"
+module.exports = "<div class=\"wrapper\">\n  <h1 *ngIf=\"user\">Welcome, {{user}}!</h1>\n  <h1 *ngIf=\"!user\">Welcome to my app!<br> Create an account to get started</h1>\n</div>\n"
 
 /***/ }),
 
@@ -855,10 +868,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'Root Component';
     }
     AppComponent.prototype.ngOnInit = function () {
     };
@@ -869,7 +884,8 @@ AppComponent = __decorate([
         selector: 'app-root',
         template: __webpack_require__(169),
         styles: [__webpack_require__(160)]
-    })
+    }),
+    __metadata("design:paramtypes", [])
 ], AppComponent);
 
 //# sourceMappingURL=app.component.js.map
@@ -1010,7 +1026,31 @@ var AddComponent = (function () {
     AddComponent.prototype.submitRaincheck = function () {
         //check for empty fields and incorrect phone number length
         if (this.name == "" || this.phone == "" || this.skus.length === 0 || this.items.length === 0 || this.items.length != this.skus.length || this.phone.length != 10) {
-            return alert("Fill in all fields before submitting");
+            //initializing alert messages
+            var alertGeneral = "Please fill in fields:";
+            var alertInequal = "";
+            var alertPhone = "";
+            //checking input values and adding to message field
+            if (!this.name) {
+                alertGeneral += " name,";
+            }
+            if (!this.phone) {
+                alertGeneral += " phone,";
+            }
+            if (this.skus.length === 0 || !this.skus) {
+                alertGeneral += " skus,";
+            }
+            if (this.items.length === 0 || !this.items) {
+                alertGeneral += " items,";
+            }
+            if (this.skus && this.items && this.skus.length != this.items.length) {
+                alertInequal = "\nSku and items inproperly matched";
+            }
+            if (this.phone && this.phone.length) {
+                alertPhone = "\nMake sure phone number is 10 digits with no spaces, dashes, or parenthesis";
+            }
+            alertGeneral = alertGeneral.substr(0, alertGeneral.length - 1) + ".";
+            return alert(alertGeneral + alertInequal + alertPhone);
         }
         var merchandise = [];
         for (var i = 0; i < this.skus.length; i++) {
@@ -1029,8 +1069,10 @@ var AddComponent = (function () {
             comments: this.comments,
             merchandise: merchandise
         };
-        this.add.addRaincheck(raincheck);
-        this.router.navigate(["../rainchecks"]);
+        if (confirm("Add raincheck for " + raincheck.name)) {
+            this.add.addRaincheck(raincheck);
+            this.router.navigate(["../rainchecks"]);
+        }
     };
     return AddComponent;
 }());

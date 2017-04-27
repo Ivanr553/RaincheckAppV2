@@ -11,19 +11,20 @@ module.exports = function(passport) {
         if(err) throw err;
         if(!user) {
           console.log("no user found")
-          return done(null, false, {message: "Unknown user"});
+          return done(null, false, {invalid: "Unknown user"});
         }
         User.comparePassword(password, user.password, (err, result) => {
           if(err) throw err;
           else if(result) {
             console.log("authenticated");
-            global.userid = user.id;
-            global.user = user.username;
-            return done(null, user);
+            return done(null, true, {
+              userid: user.id,
+              user: user.username
+            });
           }
           else if(!result) {
             console.log("not authenticated");
-            return done(null, false, {message:"incorrect password"});
+            return done(null, false, {invalid: "incorrect password"});
           }
         })
       })

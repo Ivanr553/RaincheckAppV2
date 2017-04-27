@@ -5,6 +5,8 @@ const Raincheck = require("../models/raincheckModel");
 const passport = require("passport");
 const LocalPassport = require("passport-local").Strategy
 
+
+//retreiving rainchecks depending on user
 router.post("/", (req, res) => {
   Raincheck.find({userid: req.body.userid}, (err, rainchecks) => {
     if(err) throw(err);
@@ -17,9 +19,10 @@ router.post("/", (req, res) => {
   })
 });
 
+
+//ading rainchecks
 router.post("/add", (req, res) => {
-  console.log("called")
-  console.log(req.body.userid)
+
   //formatting phone string
   let editedPhone = req.body.phone;
   editedPhone =
@@ -30,20 +33,20 @@ router.post("/add", (req, res) => {
      + "-"
      + editedPhone.substring(6, 10);
 
-     //create time for the raincheck
-     let today = new Date();
-     let dd = today.getDate();
-     let mm = today.getMonth()+1; //January is 0!
-     let yyyy = today.getFullYear();
+   //create time for the raincheck
+   let today;
+   let dd = today.getDate();
+   let mm = today.getMonth()+1;
+   let yyyy = today.getFullYear();
+   if(dd<10) {
+       dd='0'+dd
+   }
+   if(mm<10) {
+       mm='0'+mm
+   }
+   today = mm+'/'+dd+'/'+yyyy;
 
-     if(dd<10) {
-         dd='0'+dd
-     }
-     if(mm<10) {
-         mm='0'+mm
-     }
-     today = mm+'/'+dd+'/'+yyyy;
-
+  //constructing new raincheck
   let newRaincheck = new Raincheck({
     userid: req.body.userid,
     name: req.body.name,
@@ -53,20 +56,28 @@ router.post("/add", (req, res) => {
     time: today
   })
 
+  //saving raincheck to database and sending response
   newRaincheck.save(newRaincheck, (err) => {
     if(err) throw err;
-    res.send({message: newRaincheck.name + "'s order has been added" + newRaincheck});
+    res.send({
+      message: newRaincheck.name + "'s order has been added" + newRaincheck
+    });
   })
 });
 
+
+//deleting rainchecks
 router.post("/delete", (req, res) => {
+
+  //finding raincheck using _id
   Raincheck.find({_id: req.body.id}, (err, found) => {
     if(err) throw err;
-  }).remove((err) => {
-    if(err) throw err;
-    console.log("deleted");
-    res.send("deleted");
   })
+    .remove((err) => {
+      if(err) throw err;
+      console.log(found.name + "deleted");
+      res.send(found.name + "deleted");
+    })
 })
 
 

@@ -21,6 +21,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     let that = this;
     setInterval(function(){return that.user = localStorage.getItem("user")}, 1000);
+    if(this.user) {
+      this.router.navigate(['/rainchecks'])
+    }
   }
 
 }

@@ -23,6 +23,9 @@ export class LoginComponent implements OnInit {
     }
 
     onLoginSubmit() {
+      if(!this.username || !this.password) {
+        return alert("Please fill in all fields");
+      }
       let user = {
         username: this.username,
         password: this.password
@@ -30,9 +33,9 @@ export class LoginComponent implements OnInit {
       this.userService.login(user)
         .subscribe(res => {
           if(res) {
-            console.log(res.json());
-            if(res.json().message) {
-              return alert(res.json().message);
+            console.log(res);
+            if(res.json().invalid) {
+              return alert(res.json().invalid);
             }
             localStorage.setItem("userid", res.json().userid);
             localStorage.setItem("user", res.json().user);
