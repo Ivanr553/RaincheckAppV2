@@ -34,7 +34,7 @@ router.post("/add", (req, res) => {
      + editedPhone.substring(6, 10);
 
    //create time for the raincheck
-   let today;
+   let today = new Date();
    let dd = today.getDate();
    let mm = today.getMonth()+1;
    let yyyy = today.getFullYear();
